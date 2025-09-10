@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic List with Event Delegation</title>
+  <style>
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      padding: 10px;
+      margin: 5px;
+      background: #eee;
+      cursor: pointer;
+    }
+    li:hover {
+      background: #ddd;
+    }
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Click a list item</h2>
+  <ul id="list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+
+  <input type="text" id="newItemInput" placeholder="New item">
+  <button id="addItemBtn">Add Item</button>
+
+  <script>
+    const list = document.getElementById("list");
+    const addItemBtn = document.getElementById("addItemBtn");
+    const newItemInput = document.getElementById("newItemInput");
+
+    list.addEventListener("click", function(event) {
+      if (event.target && event.target.nodeName === "LI") {
+        alert("You clicked: " + event.target.textContent);
+      }
+    });
+
+    addItemBtn.addEventListener("click", function() {
+      const text = newItemInput.value.trim();
+      if (text !== "") {
+        const newItem = document.createElement("li");
+        newItem.textContent = text;
+        list.appendChild(newItem);
+        newItemInput.value = ""; // clear input
+      } else {
+        alert("Please enter an item name!");
+      }
+    });
+  </script>
+</body>
+</html>
